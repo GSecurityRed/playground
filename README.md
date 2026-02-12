@@ -9,3 +9,6 @@ The use of any information, scripts, or tools contained herein **is the sole res
 
 
 © [GSecurity]
+
+
+credits: https://github.com/coffinxp (Lostec)
