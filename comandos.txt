@@ -1,0 +1,25 @@
+cat ip.txt | nuclei -tags grafana -bs 50 -c 50 -es info
+
+./alienvault.sh domain.com
+
+cat all_urls.txt | gf xss | uro > unique_xss_targets.txt
+
+cat all_urls.txt | gf idor | uro > unique_xss_targets.txt
+
+cat all_urls.txt | gf redirect | uro > unique_xss_targets.txt
+
+python urlscan.py -d redbull.com --mode urls
+python urlscan.py -d redbull.com --mode subdomains
+python urlscan.py -d redbull.com --mode subdomains | httpx-toolkit -sc -td -title -server
+
+./virustotal.sh domain.com
+
+./wayback.sh example.com -s -sc 200
+
+./wayback.sh example.com -s -sc 200 | gf xss
+
+
+chaos -d itamaraty.gov.br -o itamaraty.txt
+httpx -l itamaraty.txt -ip -silent | grep -oP '(?<=\[)[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(?=\])' > ip_itamaraty.txt
+naabu -l ip_uniques_itamaraty.txt -top-ports 100 -rate 1500 -verify -silent -o portas_ip_itamaraty.txt
+python naabutonmap.py -i portas_ip_itamaraty.txt
